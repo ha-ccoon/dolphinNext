@@ -50,7 +50,7 @@ if __name__ == "__main__":
             subprocess.call('chown -R mysql:mysql /export/mysql/', shell=True)
 
         new_data_directory = "%s" % MYSQL_DATA_DIR_HOST
-        cmd = 'sed -i "s|# datadir\t= .*|datadir\t= %s|g" %s' % (new_data_directory, MYSQL_CONF)
+        cmd = 'sed -i "s|datadir\t\t= .*|datadir\t\t= %s|g" %s' % (new_data_directory, MYSQL_CONF)
         subprocess.call(cmd, shell=True)
 
         if not os.path.exists('/export/dolphinnext'):

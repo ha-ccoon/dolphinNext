@@ -1,42 +1,80 @@
-Sciaas Studio 2
+DolphinNext docker version
 ========
-Sciaas Studio 2 original repository is located at https://git.sqkcloud.com/sqk/sciaas-studio-2.
+DolphinNext original repository is located at https://github.com/UMMS-Biocore/dolphinnext.
 
-For a quick start please check our quick start guide.
+For a quick start please check our quick start guide. https://dolphinnext.readthedocs.io/en/latest/dolphinNext/quick.html
 
-Sciaas Studio 2 can also be run as a standalone application using a docker container.
+DolphinNext can also be run as a standalone application using a docker container.
 First docker image need to be build unless you want to use prebuild from dockerhub. So, any change in the Dockerfile requires to build the image. But if you want to use prebuild version just skip building it and start the container.
 
 Build docker image
 ---------
 
-1. To build docker image first clone one of the latest sciaas-studio-2
+1. To build docker image first clone one of the latest dolphinnext-docker
 
 ```
-git clone https://git.sqkcloud.com/sqk/sciaas-studio-2
+git clone https://github.com/UMMS-Biocore/dolphinnext-docker.git
 ```
 
 2. Build the image
 ```
-cd sciaas-studio-2
-docker build -t sciaas-studio-2 .
+cd dolphinnext-docker
+docker build -t dolphinnext-docker .
 ```
 
-3. Start the container
+Start the container
+---------
+
+1. We move database outside of the container to be able to keep the changes in the database everytime you start the container.
+Please choose a directory in your machine to mount and replace `/path/to/mount` with your path. 
+* Note: Please don't change the target directory(`/export`) in the docker image. 
+
 ```
-docker run -d -p 8080:80 -p 24:22 --name sciaas-studio-2 sciaas-studio-2
+mkdir -p /path/to/mount
 ```
 
-Now, you can open your browser to access sciaas-studio-2 using the url below.
+2. While running the container;
+```
+docker run -m 10G -p 8080:80 -v /path/to/mount:/export -ti dolphinnext-docker /bin/bash
+```
+*if you want to run a pre-build
+```
+docker run -m 10G -p 8080:80 -v /path/to/mount:/export -ti ummsbiocore/dolphinnext-docker /bin/bash
+```
+or with R markdown support;
+```
+docker run -m 10G -p 8080:80 -v /path/to/mount:/export -ti ummsbiocore/dolphinnext-studio /bin/bash
+```
+3. After you start the container, you need to start the mysql and apache server usign the command below;
+```
+startup
+```
+4. Verify that `dolphinnext` and `mysql` folders located inside of the `export` folder:
+```
+ls /export
+```
+5. Now, you can open your browser to access dolphinnext using the url below.
 
-http://localhost:8080
+http://localhost:8080/dolphinnext
 
-4. Stop the container
+Running on the Amazon or Google Cloud
+------
+We define `localhost:8080` in /path/to/mount/dolphinnext/config/.sec file and use that to log in or other operations. You need to change `localhost` to that IP address or amazon/google domain you use. So static IP address would solve the issue that you will not need to change it every time you create an instance. Please update `BASE_PATH` and `PUBWEB_URL` as follows:
+
 ```
-docker stop sciaas-studio-2
+BASE_PATH = http://localhost:8080/dolphinnext
+PUBWEB_URL = http://localhost:8080/dolphinnext/tmp/pub
 ```
 
-5. Remove the container
+to
 ```
-docker rm sciaas-studio-2
+BASE_PATH = http://your_temporary_domain_name:8080/dolphinnext
+PUBWEB_URL = http://your_temporary_domain_name:8080/dolphinnext/tmp/pub
 ```
+* Please don’t change other lines because others are used inside of docker.
+
+
+
+ 
+
+
