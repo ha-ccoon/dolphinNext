@@ -14,7 +14,7 @@
 DB=dolphinnext
 DBUSER=docker
 DBPASS=docker
-DBHOST=localhost
+DBHOST=3.36.44.34
 DBPORT=3306
 SSHPATH=/export/.dolphinnext/.ssh
 AMAZON=z76fg0iua298gh4
@@ -28,16 +28,16 @@ JWT_SECRET=very-strong-jwt-secret-password
 JWT_COOKIE_EXPIRES_IN=365
 
 [CONFIG]
-TIMEZONE=America/New_York
+TIMEZONE=Asia/Seoul
 RUNPATH=../tmp/pub
 TEMPPATH=../tmp
-API_URL = http://localhost/dolphinnext
-BASE_PATH = http://localhost:8080/dolphinnext
-PUBWEB_URL = http://localhost:8080/dolphinnext/tmp/pub
+API_URL = http://localhost
+BASE_PATH = http://localhost:8080
+PUBWEB_URL = http://localhost:8080/tmp/pub
 OCPU_URL = http://localhost
 DEBROWSER_URL = http://localhost
-OCPU_PUBWEB_URL = http://localhost/dolphinnext/tmp/pub
-NEXTFLOW_VERSION = 22.04.5
+OCPU_PUBWEB_URL = http://localhost/tmp/pub
+NEXTFLOW_VERSION = 21.04.0
 LDAP_SERVER=test
 DN_STRING=test
 BIND_USER= SVCLinuxLDAPAuth
@@ -45,18 +45,11 @@ BIND_PASS=test
 EMAIL_SENDER=test@test.edu
 EMAIL_ADMIN=test@test.edu
 
-;EMAIL_TYPE=SMTP
-;EMAIL_HOST=smtp.sendgrid.net
-;EMAIL_USERNAME=apikey
-;EMAIL_PASSWORD='your_password'
-;EMAIL_PORT=465
-
 [UICONFIG]
 COMPANY_NAME=Test Server
 PASSWORD_LOGIN=true
 ALLOW_SIGNUP=true
 ALLOW_SIGNUPGOOGLE=true
-GOOGLE_CLIENT_ID="xxx.apps.googleusercontent.com"
 ; User Preferences for profile page 
 SHOW_AMAZON_KEYS=true
 SHOW_GOOGLE_KEYS=true
@@ -74,8 +67,6 @@ SHOW_RUN_NEXTFLOWLOG=true
 SHOW_RUN_NEXTFLOWNF=true
 SHOW_RUN_NEXTFLOWCONFIG=true
 SHOW_HOMEPAGE=false
-CUSTOM_HELP_MESSAGE=''
-CUSTOM_FILE_LOCATION_MESSAGE=''
 
 ; Wizard Settings
 SHOW_WIZARD=true

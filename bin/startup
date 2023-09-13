@@ -4,7 +4,7 @@ source /etc/apache2/envvars
 # If /export/ is mounted, export_user_files file moving all data to /export/
 # symlinks will point from the original location to the new path under /export/
 # If /export/ is not given, nothing will happen in that step
-python /usr/local/bin/export_user_files.py 
+# python /usr/local/bin/export_user_files.py 
 
 mkdir -p /export/.dolphinnext/.ssh
 chown -R ${APACHE_RUN_USER}:${APACHE_RUN_GROUP} /export/.dolphinnext
@@ -16,7 +16,7 @@ fi
 
 /usr/local/bin/user_add.sh
 
-find /var/lib/mysql -type f -exec touch {} \; && service mysql start 
+# find /var/lib/mysql -type f -exec touch {} \; && service mysql start 
 #Start ssh
 service ssh start
 #Sendmail service start
@@ -30,7 +30,9 @@ crontab /usr/local/bin/dolphinnext-cron
 service cron start 
 
 #Update Timezone
-TZ=$(grep "TIMEZONE=" /export/dolphinnext/config/.sec | awk -F "=" '{print $2}')
-ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-DIFF=$(date +%:z)
-mysql -u root  --execute="SET GLOBAL time_zone = '${DIFF}';"
+# TZ=$(grep "TIMEZONE=" /export/dolphinnext/config/.sec | awk -F "=" '{print $2}')
+# ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+# DIFF=$(date +%:z)
+# mysql -u root  --execute="SET GLOBAL time_zone = '${DIFF}';"
+
+tail -f /dev/null
