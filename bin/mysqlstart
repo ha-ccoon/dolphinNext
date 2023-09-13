@@ -1,0 +1,17 @@
+#!/bin/bash
+
+find /var/lib/mysql -type f -exec touch {} \; && service mysql start
+
+mysql -uroot -e "use mysql; CREATE USER 'docker'@'localhost' IDENTIFIED BY 'docker';"
+mysql -uroot -e "use mysql; CREATE USER 'docker'@'%' IDENTIFIED BY 'docker';"
+mysql -uroot -e "use mysql; UPDATE user SET plugin='mysql_native_password' WHERE User='docker';"
+mysql -uroot -e "GRANT ALL PRIVILEGES on *.* TO 'docker'@'localhost'  WITH GRANT OPTION;"
+mysql -uroot -e "GRANT ALL PRIVILEGES on *.* TO 'docker'@'%'  WITH GRANT OPTION;"
+
+pass="$(grep password /etc/mysql/debian.cnf | sort -u | awk '{print $3}')"
+mysql -uroot -e "SET PASSWORD FOR 'debian-sys-maint'@'localhost'  = '"${pass}"';"
+#pass="$(grep dbpass /etc/phpmyadmin/config-db.php | sort -u | awk '{split($1,a,"\x27");print a[2];}')"
+#mysql -uroot -e "SET PASSWORD FOR 'phpmyadmin'@'localhost'  = '"${pass}"';"
+
+service mysql stop
+

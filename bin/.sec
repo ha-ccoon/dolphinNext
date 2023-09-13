@@ -1,0 +1,103 @@
+; This is the main DolphinNext configuration file. It contains the
+; configuration directives.
+;
+; DB: Database name
+; PUBWEB_URL: url to reach public web directory (eg. http://localhost:8080/dolphinnext/tmp/pub for localhost)
+; RUNPATH, PUBWEB_URL and OCPU_PUBWEB_URL should end with same directory structure
+; OCPU_URL: url to reach local ocpu server (eg. http://localhost for localhost in which http://localhost/ocpu exist in the server)
+; OCPU_PUBWEB_URL: url to reach local pubweb directory (eg. http://localhost/dolphinnext/tmp/pub for localhost) 
+; API_URL must be http://localhost/dolphinnext in docker, since this url will be used to execute commands inside of the docker
+
+
+
+[Dolphinnext]
+DB=dolphinnext
+DBUSER=docker
+DBPASS=docker
+DBHOST=3.36.44.34
+DBPORT=3306
+SSHPATH=/export/.dolphinnext/.ssh
+AMAZON=z76fg0iua298gh4
+AMZPATH=/export/.dolphinnext/.amz
+GOOGPATH=/export/.dolphinnext/.goog
+SALT=23fg7r3
+PEPPER=3d5f1s8
+MASTER=u7ygvc2
+VERIFY=2s8f5h
+JWT_SECRET=very-strong-jwt-secret-password
+JWT_COOKIE_EXPIRES_IN=365
+
+[CONFIG]
+TIMEZONE=Asia/Seoul
+RUNPATH=../tmp/pub
+TEMPPATH=../tmp
+API_URL = http://localhost
+BASE_PATH = http://localhost:8080
+PUBWEB_URL = http://localhost:8080/tmp/pub
+OCPU_URL = http://localhost
+DEBROWSER_URL = http://localhost
+OCPU_PUBWEB_URL = http://localhost/tmp/pub
+NEXTFLOW_VERSION = 21.04.0
+LDAP_SERVER=test
+DN_STRING=test
+BIND_USER= SVCLinuxLDAPAuth
+BIND_PASS=test
+EMAIL_SENDER=test@test.edu
+EMAIL_ADMIN=test@test.edu
+
+[UICONFIG]
+COMPANY_NAME=Test Server
+PASSWORD_LOGIN=true
+ALLOW_SIGNUP=true
+ALLOW_SIGNUPGOOGLE=true
+; User Preferences for profile page 
+SHOW_AMAZON_KEYS=true
+SHOW_GOOGLE_KEYS=true
+SHOW_SSH_KEYS=true
+SHOW_GROUPS=true
+SHOW_GITHUB=true
+; User Preferences for log tab in run page
+; Note: Set SHOW_RUN_NEXTFLOWLOG as false to hide amazon keys.
+SHOW_RUN_LOG=true
+SHOW_RUN_TIMELINE=true
+SHOW_RUN_REPORT=true
+SHOW_RUN_DAG=true
+SHOW_RUN_TRACE=true
+SHOW_RUN_NEXTFLOWLOG=true  
+SHOW_RUN_NEXTFLOWNF=true
+SHOW_RUN_NEXTFLOWCONFIG=true
+SHOW_HOMEPAGE=false
+
+; Wizard Settings
+SHOW_WIZARD=true
+; In order to use test profile, please define a run environment and share with group.
+; Use shared group id to define TEST_PROFILE_GROUP_ID.
+;SHOW_TEST_PROFILE=true
+;TEST_PROFILE_GROUP_ID=18
+
+; The Okta SSO Authorization server's Config
+[OKTACONFIG]
+SSO_LOGIN=false
+; OKTA Sign In Method. SAML or OIDC (OpenID Connect)
+; For SAML, OKTA_METADATA variable is required.
+; For OIDC, define CLIENT_ID, CLIENT_SECRET, ISSUER and OKTA_API_TOKEN variables.
+OKTA_METHOD=SAML
+
+; Client credentials. Retrieved from OKTA Auth Server
+CLIENT_ID=test
+CLIENT_SECRET=test
+ISSUER=https://{yourOktaDomain}.com/oauth2/{authServerId}
+; OKTA api token for session delete on signout
+OKTA_API_TOKEN=test
+
+; SAML 2.0 Metadata. Enter full path or Web URL.
+; e.g. /var/www/html/dolphinnext/simplesamlphp/metadata/dolphinnext_metadata
+; e.g. https://dev.okta.com/app/exk2/sso/saml/metadata
+;OKTA_METADATA=/var/www/html/dolphinnext/simplesamlphp/metadata/dolphinnext_metadata
+OKTA_METADATA=/mac/dolphinnext_metadata
+; Configuration parameters for OKTA
+;Single Sign On URL/Recipient URL/Destination URL: BASE_PATH/okta/simplesamlphp/module.php/saml/sp/saml2-acs.php/okta-app
+;Audience Restriction: BASE_PATH/okta/simplesamlphp/module.php/saml/sp/metadata.php/okta-app
+;Default Relay State: BASE_PATH/?saml_sso=okta-app
+
+

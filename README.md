@@ -1,85 +1,42 @@
-# DolphinNext
+Sciaas Studio 2
+========
+Sciaas Studio 2 original repository is located at https://git.sqkcloud.com/sqk/sciaas-studio-2.
 
-### A platform to create reproducible, portable and highly parallel pipelines
+For a quick start please check our quick start guide.
 
-**Citation:** Yukselen, O., Turkyilmaz, O., Ozturk, A.R. et al. DolphinNext: a distributed data processing platform for high throughput genomics. BMC Genomics 21, 310 (2020). https://doi.org/10.1186/s12864-020-6714-x
+Sciaas Studio 2 can also be run as a standalone application using a docker container.
+First docker image need to be build unless you want to use prebuild from dockerhub. So, any change in the Dockerfile requires to build the image. But if you want to use prebuild version just skip building it and start the container.
 
-[![Build Status](https://api.travis-ci.com/UMMS-Biocore/dolphinnext.svg?branch=master)](https://api.travis-ci.com/UMMS-Biocore/dolphinnext)[![DOI:10.1186/s12864-020-6714-x](https://zenodo.org/badge/DOI/10.1186/s12864-020-6714-x.svg)](https://doi.org/10.1186/s12864-020-6714-x)
+Build docker image
+---------
 
------
+1. To build docker image first clone one of the latest sciaas-studio-2
 
-[DolphinNext](https://dolphinnext.umassmed.edu/), an intuitive web interface designed for users with limited bioinformatics experience to analyze and manage large numbers of samples on High Performance Computing (HPC) environments, cloud services or on a personal workstation. 
+```
+git clone https://git.sqkcloud.com/sqk/sciaas-studio-2
+```
 
-* A platform to manage processing pipelines for large projects that require a scalable solution with automatic monitoring of large number of concurrent jobs
-* A drag and drop user interface to create NextFlow pipelines.
-* Run pipelines with different executors such as SGE, LSF, SLURM, Ignite etc. 
+2. Build the image
+```
+cd sciaas-studio-2
+docker build -t sciaas-studio-2 .
+```
 
-## Benefits of the design:
+3. Start the container
+```
+docker run -d -p 8080:80 -p 24:22 --name sciaas-studio-2 sciaas-studio-2
+```
 
-* **Build:** Easily create new pipelines using a drag and drop interface. No need to write commands from scratch, instead reuse existing processes/modules to create new pipelines
+Now, you can open your browser to access sciaas-studio-2 using the url below.
 
-* **Run:** Execute pipelines in any host environment. Seamless Amazon Cloud and Google Cloud integration to create a cluster (instance), execute the pipeline and transfer the results to the storage services (S3 or GS).
+http://localhost:8080
 
-* **Resume:** A continuous checkpoint mechanism keeps track of each step of the running pipeline. Partially completed pipelines can be resumed at any stage even after parameter changes.
+4. Stop the container
+```
+docker stop sciaas-studio-2
+```
 
-* **Improve:** Revisioning system keeps track of pipelines and processes versions as well as their parameters. Edit, improve shared pipelines and customize them according to your needs.
-
-* **Share:** Share pipelines across different platforms. Isolate pipeline-specific dependencies in a container and easily replicate the methods in other clusters
-
-
-## Public Pipelines: 
-
-* RNA-Seq Pipelines (RSEM, HISAT, STAR, Tophat2)
-* ATAC-Seq Pipeline
-* ChIP Seq Pipeline
-* Single Cell Pipelines (10X Genomics, Indrop)
-* piRNA Pipelines (piPipes ChIP-Seq, Degradome/RAGE/CAGE, smallRNA)
-* *Sub Modules*:
-    * Trimmer
-    * Adapter Removal
-    * Quality Filtering
-    * Common RNA Filtering
-    * ESAT
-    * FastQC, 
-    * MultiQC
-    * RSeQC
-    * Picard
-    * IGV and UCSC genome browser file conversion
-
-## Overview:
-
-[![Overview Video](https://raw.githubusercontent.com/UMMS-Biocore/dolphinnext/master/docs/dolphinNext/dolphinnext_images/youtube-overview.png)](https://www.youtube.com/watch?v=1ak1m5pvkw4&t)
-
-## Highlights:
-
-##### Workflow design with UI:
-
-# ![RSEM](https://raw.githubusercontent.com/UMMS-Biocore/dolphinnext/master/docs/dolphinNext/dolphinnext_images/pipeline_rsem.png)
-
-##### Modular System (Nested Workflows):
-
-# ![RSEM](https://raw.githubusercontent.com/UMMS-Biocore/dolphinnext/master/docs/dolphinNext/dolphinnext_images/pipeline_rsem_nested.png)
-
-## Quick Start and Documentation
-
-*Quick start guide*, can be reached at https://dolphinnext.readthedocs.io/en/latest/dolphinNext/quick.html
-
-*Complete documentation* is available at https://dolphinnext.readthedocs.io
-
-[*Developer Tutorial*](https://github.com/UMMS-Biocore/dolphinnext-tutorial) is available which explains the basics of DolphinNext. You can use our [website](https://dolphinnext.umassmed.edu/), or easily pull Docker image of Dolphinnext and start creating pipelines in your local server.
-
-## Citation:
-
-If you use DolphinNext in your research, please cite:
-
-Yukselen, O., Turkyilmaz, O., Ozturk, A.R. et al. DolphinNext: a distributed data processing platform for high throughput genomics. BMC Genomics 21, 310 (2020). https://doi.org/10.1186/s12864-020-6714-x
-
-## Support
-
-UMMS Biocore, provides support for installations as well as commercial support for DolphinNext. Please contact support@dolphinnext.com
-
-
-## Licensing
-
-DolphinNext released under GNU General Public License 3.0.
-
+5. Remove the container
+```
+docker rm sciaas-studio-2
+```
